@@ -667,7 +667,7 @@ custom_ui = r"""
 body {
     margin: 0;
     overflow: hidden;
-    background: #36383e;
+    background: #585B66;
     font-family: Arial, sans-serif;
 }
 
@@ -675,7 +675,6 @@ body {
     position: relative;
 }
 
-#deck-container #ambient-bloom-canvas,
 #deck-container #selection-bloom-canvas {
     position: absolute;
     inset: 0;
@@ -683,10 +682,6 @@ body {
     height: 100%;
     pointer-events: none;
     mix-blend-mode: plus-lighter;
-}
-
-#deck-container #ambient-bloom-canvas {
-    z-index: 2;
 }
 
 #deck-container #selection-bloom-canvas {
@@ -753,7 +748,7 @@ body {
     position: fixed;
 
     left: 20px;
-    bottom: 20px;
+    bottom: 82px;
 
     z-index: 9999;
 
@@ -1111,10 +1106,11 @@ body {
 
 #source-license {
     position: fixed;
-    top: 20px;
-    left: 290px;
+    top: auto;
+    bottom: 20px;
+    left: 20px;
     z-index: 9997;
-    width: min(360px, calc(100vw - 580px));
+    width: min(360px, calc(100vw - 40px));
     max-height: 42vh;
     overflow-y: auto;
     background: rgba(5, 8, 15, 0.9);
@@ -1384,7 +1380,8 @@ body {
 
 @media (max-width: 950px) {
     #source-license {
-        top: 94px;
+        top: auto;
+        bottom: 20px;
         left: 20px;
         width: min(360px, calc(100vw - 40px));
     }
@@ -1424,9 +1421,9 @@ body {
     }
 
     #source-license {
-        top: 82px;
+        top: auto;
         left: 12px;
-        bottom: auto;
+        bottom: 12px;
         width: calc(100vw - 24px);
         max-height: 90px;
     }
@@ -1476,7 +1473,7 @@ body {
     </div>
 
     <div id="map-title-sub">
-        LAND PRICE 2026
+        1983～2026
     </div>
 
 </div>
@@ -1941,9 +1938,9 @@ function updateMap(year, transitionDuration = 90) {{
 }}
 
 /* ==========================================
-   全地点・選択地点それぞれのポストプロセスBloom
+   選択地点だけのポストプロセスBloom
 
-   全地点用Deckと選択地点用Deckを分け、各ColumnLayerだけを透明なframebufferへ描画する。
+   選択ColumnLayerだけを専用Deckの透明framebufferへ描画する。
    bright-pass -> separable Gaussian blur (horizontal / vertical) -> glow出力を
    独立した透明canvasへ加算合成するため、地図レイヤーには効果がかからない。
    ========================================== */
@@ -2023,8 +2020,6 @@ vec4 selectionBloom_sampleColor(sampler2D source, vec2 texSize, vec2 texCoord) {
     ]
 }};
 
-let ambientBloomDeck = null;
-let ambientBloomEffect = null;
 let selectionBloomDeck = null;
 let selectionBloomEffect = null;
 
@@ -2040,11 +2035,6 @@ if (
             typeof CSS.supports === "function" &&
             CSS.supports("mix-blend-mode", "plus-lighter");
         const bloomContainer = document.getElementById("deck-container");
-        const ambientBloomCanvas = document.createElement("canvas");
-        ambientBloomCanvas.id = "ambient-bloom-canvas";
-        ambientBloomCanvas.style.mixBlendMode = supportsPlusLighter ? "plus-lighter" : "screen";
-        bloomContainer.appendChild(ambientBloomCanvas);
-
         const selectionBloomCanvas = document.createElement("canvas");
         selectionBloomCanvas.id = "selection-bloom-canvas";
         selectionBloomCanvas.style.mixBlendMode = supportsPlusLighter ? "plus-lighter" : "screen";
@@ -2058,28 +2048,11 @@ if (
             bearing: -14.1
         }};
 
-        ambientBloomEffect = new deck.PostProcessEffect(selectionBloomShader, {{
-            threshold: 0.08,
-            softKnee: 0.12,
-            radius: 5.5 * Math.min(window.devicePixelRatio || 1, 2),
-            intensity: 0.30
-        }});
-
         selectionBloomEffect = new deck.PostProcessEffect(selectionBloomShader, {{
             threshold: 0.10,
             softKnee: 0.12,
             radius: 5.5 * Math.min(window.devicePixelRatio || 1, 2),
             intensity: 1.8
-        }});
-
-        ambientBloomDeck = new deck.Deck({{
-            canvas: ambientBloomCanvas,
-            views: [new deck.MapView({{id: "map-view", controller: false}})],
-            initialViewState: initialBloomViewState,
-            controller: false,
-            clearColor: [0, 0, 0, 0],
-            layers: [],
-            effects: [ambientBloomEffect]
         }});
 
         selectionBloomDeck = new deck.Deck({{
@@ -2092,74 +2065,26 @@ if (
             effects: []
         }});
     }} catch (error) {{
-        console.error("Bloom用Deckの初期化に失敗しました。通常表示を続けます。", error);
-        ambientBloomDeck = null;
-        ambientBloomEffect = null;
+        console.error("選択柱Bloomの初期化に失敗しました。通常表示を続けます。", error);
         selectionBloomDeck = null;
         selectionBloomEffect = null;
     }}
 }}
 
 function syncSelectionBloomViewState(viewState) {{
-    if (!ambientBloomDeck && !selectionBloomDeck) return;
+    if (!selectionBloomDeck) return;
     const state = viewState || currentViewState;
     if (!state) return;
 
-    for (const bloomDeck of [ambientBloomDeck, selectionBloomDeck]) {{
-        if (!bloomDeck) continue;
-        try {{
-            bloomDeck.setProps({{viewState: state}});
-        }} catch (error) {{
-            console.error("Bloom用カメラの同期に失敗しました。", error);
-        }}
+    try {{
+        selectionBloomDeck.setProps({{viewState: state}});
+    }} catch (error) {{
+        console.error("選択柱Bloomカメラの同期に失敗しました。", error);
     }}
 }}
 
 function updateSelectionBloom(selected, transitionDuration = 0) {{
     const hasSelectedColumn = selected && selected.elevation > 0;
-    if (ambientBloomDeck) {{
-        const allColumnsBloomLayer = new deck.ColumnLayer({{
-            id: "all-columns-bloom-source",
-            data: currentMapData,
-            getPosition: d => [d.lon, d.lat],
-            getElevation: d => d.elevation,
-            elevationScale: 0.7,
-            radius: 90,
-            getFillColor: d => {{
-                if (selected && d.id !== selected.id) {{
-                    return [
-                        Math.round(d.color[0] * 0.72),
-                        Math.round(d.color[1] * 0.72),
-                        Math.round(d.color[2] * 0.72),
-                        105
-                    ];
-                }}
-                const selectedAlpha =
-                    hasSelectedColumn && d.id === selected.id ? 255 : d.color[3];
-                return [d.color[0], d.color[1], d.color[2], selectedAlpha];
-            }},
-            material: false,
-            pickable: false,
-            autoHighlight: false,
-            transitions: {{
-                getElevation: {{
-                    duration: transitionDuration,
-                    easing: t => t * t * (3 - 2 * t)
-                }},
-                getFillColor: {{
-                    duration: transitionDuration,
-                    easing: t => t * t * (3 - 2 * t)
-                }}
-            }}
-        }});
-
-        try {{
-            ambientBloomDeck.setProps({{layers: [allColumnsBloomLayer]}});
-        }} catch (error) {{
-            console.error("全地点Bloomの更新に失敗しました。", error);
-        }}
-    }}
-
     if (!selectionBloomDeck) return;
     const layers = hasSelectedColumn
         ? [new deck.ColumnLayer({{
@@ -2270,6 +2195,17 @@ const detailTitle = document.getElementById("detail-title");
 const detailAddress = document.getElementById("detail-address");
 const detailCurrent = document.getElementById("detail-current");
 const detailChart = document.getElementById("detail-chart");
+const sourceLicensePanel = document.getElementById("source-license");
+const legendPanel = document.getElementById("legend");
+
+function updateSourceLegendSpacing() {{
+    const sourceHeight = sourceLicensePanel.getBoundingClientRect().height;
+    legendPanel.style.bottom = Math.max(82, Math.ceil(sourceHeight + 32)) + "px";
+}}
+
+sourceLicensePanel.addEventListener("toggle", updateSourceLegendSpacing);
+window.addEventListener("resize", updateSourceLegendSpacing);
+updateSourceLegendSpacing();
 
 let selectedRecordId = null;
 let selectedRecord = null;
@@ -2659,9 +2595,6 @@ const slider =
 const yearLabel =
     document.getElementById("timeline-year");
 
-const subtitle =
-    document.getElementById("map-title-sub");
-
 const playButton =
     document.getElementById("play-button");
 
@@ -2680,8 +2613,6 @@ function setYear(year, transitionDuration = 90, stopPlayback = true) {{
 
     slider.value = String(year);
     yearLabel.textContent = year;
-    subtitle.textContent = "LAND PRICE " + year;
-
     updateMap(year, transitionDuration);
 
     if (selectedRecordId) {{
