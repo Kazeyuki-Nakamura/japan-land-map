@@ -1,0 +1,58 @@
+THIRD-PARTY NOTICES
+===================
+
+Browser-distributed JavaScript
+------------------------------
+
+1. deck.gl standalone UMD, version 9.3.11
+   Source package: https://registry.npmjs.org/deck.gl/9.3.11
+   Repository path: site/vendor/deck.gl.min.js
+   Path inside the published site: vendor/deck.gl.min.js
+   License: MIT (full text follows; the package copy is site/vendor/deck.gl.LICENSE.txt)
+   The official standalone bundle is the only browser JavaScript library in
+   this site. Its package manifest declares @deck.gl/aggregation-layers,
+   @deck.gl/arcgis, @deck.gl/carto, @deck.gl/core, @deck.gl/extensions,
+   @deck.gl/geo-layers, @deck.gl/google-maps, @deck.gl/json, @deck.gl/layers,
+   @deck.gl/mapbox, @deck.gl/mesh-layers, @deck.gl/react, @deck.gl/widgets
+   (all 9.3.11), plus @loaders.gl/core (^4.4.3), @luma.gl/core (~9.3.5), and
+   @luma.gl/engine (~9.3.5). The distribution's own bundled-license block
+   identifies these additional
+   separately licensed components:
+
+   a. long.js / long — Apache License 2.0
+      Copyright 2013 Daniel Wirtz; Copyright 2009 The Closure Library Authors;
+      Copyright 2020 Daniel Wirtz / The long.js Authors.
+      Full license text: Apache-2.0.txt in this directory.
+
+   b. ieee754 — BSD 3-Clause License
+      The bundled file credits Feross Aboukhadijeh; the npm package notice also
+      retains Copyright 2008 Fair Oaks Labs, Inc.
+      Full license text: BSD-3-Clause-ieee754.txt in this directory.
+
+MIT License — deck.gl
+---------------------
+Copyright Vis.gl contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Build-time tools (not shipped to browser)
+-----------------------------------------
+pydeck 0.9.3 (Apache License 2.0) is used by map.py only to generate an HTML
+skeleton. pandas and geopandas are used only for data preparation. None of those
+Python packages are included in site/ or requested by the browser at runtime.

@@ -1,0 +1,8 @@
+# Original input is used only by the local data-build process; never publish it.
+/L01-26_GML.zip
+/output/
+/work/
+__pycache__/
+*.py[cod]
+.venv/
+/source-data/ne_10m_admin_1_states_provinces.zip

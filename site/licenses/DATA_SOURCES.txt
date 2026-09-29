@@ -1,0 +1,31 @@
+DATA SOURCES AND TERMS
+======================
+
+Land prices
+-----------
+Formal name: 国土数値情報（地価公示）（令和8年）
+Provider: Ministry of Land, Infrastructure, Transport and Tourism (MLIT), Japan
+Official data page: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2026.html
+Terms: The official page labels 2019 onward as open data (CC BY 4.0). The bundled
+2026 data is derived from the 2026 edition, as of January 1, 2026. Source data
+fields were selected, converted into local JSON, and arranged into annual price
+history for this application.
+Required attribution displayed by this site:
+「国土数値情報（地価公示）（令和8年）」（国土交通省）を加工して作成
+Official terms: https://nlftp.mlit.go.jp/ksj/other/agreement.html
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+
+Prefecture boundaries
+---------------------
+Formal name: Natural Earth 1:10m Admin 1 – States, Provinces, version 5.1.1
+Provider: Natural Earth
+Official source: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/
+Terms: Natural Earth's official terms place its vector and raster data in the
+public domain; permission and credit are not required. This site includes the
+recommended credit “Made with Natural Earth.”
+Terms page: https://www.naturalearthdata.com/about/terms-of-use/
+Transformation: the Japan/admin=Japan records were selected from the official
+source Shapefile, retaining the 47 Japanese prefecture polygons and Japanese
+prefecture names; converted to EPSG:4326 GeoJSON without geometry simplification.
+This is a cartographic first-order boundary dataset, not a survey/legal boundary
+product. No Geospatial Information Authority of Japan boundary data is included.
