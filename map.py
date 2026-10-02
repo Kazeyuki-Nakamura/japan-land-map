@@ -1486,6 +1486,129 @@ body {
 
 }
 
+/* Readable dark-SF hierarchy: brighter land and restrained, tiered surfaces. */
+:root {
+    color-scheme: dark;
+    --surface-primary: rgba(25, 39, 57, 0.96);
+    --surface-secondary: rgba(26, 41, 59, 0.93);
+    --surface-passive: rgba(25, 39, 55, 0.87);
+    --border-primary: rgba(190, 218, 240, 0.30);
+    --border-secondary: rgba(178, 207, 232, 0.21);
+    --text-primary: #f2f7fc;
+    --text-secondary: #c2cfdd;
+    --text-muted: #9aaabd;
+    --accent-cyan: #70d8ed;
+}
+
+/* Keep the sea tone requested earlier; lift land out of the near-black sea. */
+#map-title, #legend, #system-monitor, #source-license {
+    background: var(--surface-passive);
+    border-color: var(--border-secondary);
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(4, 11, 20, 0.24);
+}
+
+#display-controls, #prefecture-filter {
+    background: var(--surface-secondary);
+    border-color: var(--border-secondary);
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(4, 11, 20, 0.26);
+    backdrop-filter: blur(6px);
+}
+
+#detail-panel, #timeline {
+    background: var(--surface-primary);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+    box-shadow: 0 10px 30px rgba(4, 11, 20, 0.34);
+    backdrop-filter: blur(7px);
+}
+
+#map-title-main { font-size: clamp(17px, 1.05vw, 20px); }
+#map-title-sub, #display-controls-title, .display-control-row,
+#prefecture-filter-title, .region-check, .prefecture-check,
+#detail-address, #detail-hint, #source-license-content {
+    color: var(--text-secondary);
+}
+
+#legend-title, #timeline-years, #detail-years,
+#system-monitor-title, .system-label {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+#timeline-year { font-size: clamp(23px, 1.55vw, 28px); }
+#detail-title { font-size: clamp(16px, 1.1vw, 18px); }
+#detail-address, #detail-hint { opacity: 1; }
+#detail-current { background: rgba(144, 174, 203, 0.12); }
+#detail-chart { height: clamp(76px, 14vh, 140px); }
+#detail-panel { max-height: min(72vh, calc(100vh - 314px)); }
+#detail-close { background: rgba(30, 46, 64, 0.98); color: var(--text-primary); }
+#system-online { color: #8ce6f3; text-shadow: none; }
+.system-value { color: var(--text-primary); }
+#source-license-content a { color: var(--accent-cyan); }
+#display-controls select { background: #263a50; color: var(--text-primary); }
+#play-button, .year-step-button, .prefecture-action {
+    color: var(--text-primary);
+    border-color: rgba(190, 218, 240, 0.25);
+}
+
+#timeline {
+    width: min(clamp(390px, 34vw, 520px), calc(100vw - 360px));
+    box-sizing: border-box;
+    padding: clamp(9px, 1vh, 13px) clamp(12px, 1.3vw, 18px);
+}
+
+#legend { width: clamp(220px, 17vw, 260px); }
+#display-controls, #prefecture-filter { width: clamp(230px, 17vw, 260px); }
+
+@media (min-width: 701px) and (max-height: 820px) {
+    #system-monitor { top: 14px; padding: 8px 10px; }
+    #system-monitor-title { margin-bottom: 5px; }
+    .system-grid { gap: 3px 9px; font-size: 11px; }
+    #display-controls { top: 116px; padding: 8px 10px; }
+    #display-controls-title { margin-bottom: 5px; }
+    .display-control-row { gap: 6px; margin-top: 5px; font-size: 11px; }
+    #prefecture-filter { top: 216px; max-height: calc(100vh - 232px); }
+    #timeline { width: min(480px, calc(100vw - 340px)); }
+    #legend { width: 230px; padding: 10px 12px; }
+}
+
+button:focus-visible, select:focus-visible,
+input:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+@media (min-width: 521px) and (max-width: 700px) {
+    #timeline {
+        left: auto;
+        right: 12px;
+        transform: none;
+        width: calc(100vw - 220px);
+    }
+
+    #source-license {
+        width: min(180px, calc(50vw - 20px));
+        max-height: 80px;
+    }
+}
+
+@media (max-width: 520px) {
+    #timeline {
+        left: 12px;
+        right: 12px;
+        transform: none;
+        width: calc(100vw - 24px);
+    }
+
+    #source-license {
+        bottom: 108px;
+        width: calc(100vw - 24px);
+        max-height: 76px;
+    }
+}
+
 </style>
 
 <div id="boot-overlay">
@@ -1884,9 +2007,9 @@ const prefectureBoundaryLayer = new deck.GeoJsonLayer({{
     filled: true,
     stroked: true,
     pickable: false,
-    getFillColor: [5, 8, 15, 255],
+    getFillColor: [17, 28, 44, 255],
     lineWidthMinPixels: 1.1,
-    getLineColor: [54, 20, 66, 220],
+    getLineColor: [72, 67, 101, 220],
     getLineWidth: 1.1,
     lineWidthUnits: "pixels",
     parameters: {{
