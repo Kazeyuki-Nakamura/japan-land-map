@@ -529,7 +529,7 @@ tooltip = {
     """,
 
     "style": {
-        "backgroundColor": "rgba(5, 8, 15, 0.92)",
+        "backgroundColor": "rgba(16, 28, 45, 0.96)",
         "color": "white",
         "border": "1px solid rgba(255,255,255,0.15)",
         "borderRadius": "8px",
@@ -704,7 +704,7 @@ body {
 
     padding: 12px 18px;
 
-    background: rgba(5, 8, 15, 0.80);
+    background: rgba(16, 28, 45, 0.80);
 
     border: 1px solid rgba(255,255,255,0.18);
 
@@ -733,7 +733,7 @@ body {
 
     font-size: 11px;
 
-    opacity: 0.65;
+    opacity: 0.82;
 
     letter-spacing: 1px;
 }
@@ -756,9 +756,9 @@ body {
 
     padding: 14px 16px;
 
-    background: rgba(5, 8, 15, 0.84);
+    background: rgba(16, 28, 45, 0.84);
 
-    border: 1px solid rgba(255,255,255,0.16);
+    border: 1px solid rgba(205,225,245,0.24);
 
     border-radius: 8px;
 
@@ -849,9 +849,9 @@ body {
 
     padding: 14px 18px;
 
-    background: rgba(5, 8, 15, 0.88);
+    background: rgba(16, 28, 45, 0.88);
 
-    border: 1px solid rgba(255,255,255,0.16);
+    border: 1px solid rgba(205,225,245,0.24);
 
     border-radius: 10px;
 
@@ -945,7 +945,7 @@ body {
 
     font-size: 10px;
 
-    opacity: 0.6;
+    opacity: 0.78;
 
     margin-top: 3px;
 }
@@ -962,8 +962,8 @@ body {
     z-index: 9999;
     width: 250px;
     padding: 11px 12px;
-    background: rgba(5, 8, 15, 0.88);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(16, 28, 45, 0.88);
+    border: 1px solid rgba(205,225,245,0.24);
     border-radius: 8px;
     color: white;
     backdrop-filter: blur(8px);
@@ -991,7 +991,7 @@ body {
     padding: 5px 7px;
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 5px;
-    background: #111a27;
+    background: #1b2d41;
     color: white;
     font-size: 11px;
 }
@@ -1004,8 +1004,8 @@ body {
     width: 250px;
     max-height: calc(100vh - 264px);
     overflow-y: auto;
-    background: rgba(5, 8, 15, 0.9);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(16, 28, 45, 0.9);
+    border: 1px solid rgba(205,225,245,0.24);
     border-radius: 8px;
     color: white;
     backdrop-filter: blur(8px);
@@ -1048,7 +1048,7 @@ body {
 
 #prefecture-status {
     font-size: 9px;
-    opacity: 0.55;
+    opacity: 0.74;
     margin: 0;
     white-space: nowrap;
 }
@@ -1113,8 +1113,8 @@ body {
     width: min(360px, calc(100vw - 40px));
     max-height: 42vh;
     overflow-y: auto;
-    background: rgba(5, 8, 15, 0.9);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(16, 28, 45, 0.9);
+    border: 1px solid rgba(205,225,245,0.24);
     border-radius: 8px;
     color: white;
     backdrop-filter: blur(8px);
@@ -1163,8 +1163,8 @@ body {
     overflow-y: auto;
     padding: 16px;
     box-sizing: border-box;
-    background: rgba(5, 8, 15, 0.94);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(16, 28, 45, 0.94);
+    border: 1px solid rgba(205,225,245,0.24);
     border-radius: 10px;
     color: white;
     box-shadow: 0 0 24px rgba(0,255,255,0.08);
@@ -1173,10 +1173,17 @@ body {
 }
 
 #detail-close {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     float: right;
+    margin-top: -8px;
+    margin-right: -6px;
+    padding: 0 5px;
     border: 0;
-    background: transparent;
-    color: rgba(255,255,255,0.65);
+    border-radius: 4px;
+    background: rgba(16, 28, 45, 0.96);
+    color: rgba(255,255,255,0.9);
     font-size: 20px;
     cursor: pointer;
 }
@@ -1189,7 +1196,7 @@ body {
 
 #detail-address {
     font-size: 12px;
-    opacity: 0.7;
+    opacity: 0.84;
     line-height: 1.5;
     margin-bottom: 10px;
 }
@@ -1199,27 +1206,27 @@ body {
     line-height: 1.8;
     padding: 8px 10px;
     margin-bottom: 10px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.09);
     border-radius: 6px;
 }
 
 #detail-chart {
     width: 100%;
-    height: 150px;
+    height: clamp(92px, 16vh, 150px);
 }
 
 #detail-years {
     display: flex;
     justify-content: space-between;
     font-size: 9px;
-    opacity: 0.55;
+    opacity: 0.72;
     margin-top: -3px;
 }
 
 #detail-hint {
     margin-top: 8px;
     font-size: 10px;
-    opacity: 0.5;
+    opacity: 0.70;
 }
 
 /* ==========================================
@@ -1313,7 +1320,7 @@ body {
     width: 250px;
     padding: 10px 12px;
     box-sizing: border-box;
-    background: rgba(5, 8, 15, 0.82);
+    background: rgba(16, 28, 45, 0.82);
     border: 1px solid rgba(0,255,255,.20);
     color: rgba(235,255,255,.90);
     box-shadow: 0 0 18px rgba(0,255,255,.06);
@@ -1326,9 +1333,9 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 1.2px;
-    opacity: .78;
+    opacity: .92;
 }
 
 #system-online {
@@ -1340,8 +1347,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px 12px;
-    font-size: 10px;
-    line-height: 1.45;
+    font-size: 11px;
+    line-height: 1.5;
 }
 
 .system-cell {
@@ -1352,7 +1359,7 @@ body {
 }
 
 .system-label {
-    opacity: .45;
+    opacity: .68;
 }
 
 .system-value {
@@ -1384,6 +1391,46 @@ body {
         bottom: 20px;
         left: 20px;
         width: min(360px, calc(100vw - 40px));
+    }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+    #timeline {
+        width: min(440px, calc(100vw - 440px));
+        box-sizing: border-box;
+    }
+
+    #source-license {
+        bottom: 140px;
+    }
+}
+
+@media (min-width: 701px) and (max-height: 820px) {
+    #timeline {
+        bottom: 12px;
+        padding: 8px 12px;
+    }
+
+    #timeline-top {
+        margin-bottom: 4px;
+    }
+
+    #timeline-year {
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+
+    #timeline-years {
+        display: flex;
+        height: 10px;
+        margin-top: 0;
+        font-size: 9px;
+        opacity: .72;
+    }
+
+    .year-step-button {
+        height: 28px;
+        line-height: 26px;
     }
 }
 
@@ -2195,12 +2242,15 @@ const detailTitle = document.getElementById("detail-title");
 const detailAddress = document.getElementById("detail-address");
 const detailCurrent = document.getElementById("detail-current");
 const detailChart = document.getElementById("detail-chart");
+const timelinePanel = document.getElementById("timeline");
 const sourceLicensePanel = document.getElementById("source-license");
 const legendPanel = document.getElementById("legend");
 
 function updateSourceLegendSpacing() {{
     const sourceHeight = sourceLicensePanel.getBoundingClientRect().height;
-    legendPanel.style.bottom = Math.max(82, Math.ceil(sourceHeight + 32)) + "px";
+    const sourceBottom = parseFloat(getComputedStyle(sourceLicensePanel).bottom) || 20;
+    legendPanel.style.bottom =
+        Math.max(82, Math.ceil(sourceBottom + sourceHeight + 16)) + "px";
 }}
 
 sourceLicensePanel.addEventListener("toggle", updateSourceLegendSpacing);
@@ -2423,22 +2473,27 @@ function updateDetailForYear(year) {{
 
 function positionDetailPanel() {{
     const compact = window.innerWidth <= 700;
+    const viewportHeight = window.visualViewport?.height || window.innerHeight;
+    const timelineTop = timelinePanel.getBoundingClientRect().top;
+    const filterTop = prefectureFilter.getBoundingClientRect().top;
+    const detailReserve = compact ? 160 : 190;
+    const filterSpace = timelineTop - filterTop - detailReserve - 20;
+    const preferredFilterHeight = viewportHeight * (compact ? 0.18 : 0.28);
     const filterHeightLimit = Math.max(
-        110,
-        window.innerHeight * (compact ? 0.20 : 0.28)
+        80,
+        Math.min(preferredFilterHeight, filterSpace)
     );
     prefectureFilter.style.maxHeight = Math.round(filterHeightLimit) + "px";
 
     const filterBottom = prefectureFilter.getBoundingClientRect().bottom;
     const panelTop = filterBottom + 10;
-    detailPanel.style.top = Math.round(panelTop) + "px";
+    const panelBottomLimit = Math.min(viewportHeight - 12, timelineTop - 12);
+    const panelMaxHeight = Math.max(80, panelBottomLimit - panelTop);
+    detailPanel.style.top = Math.max(12, Math.round(panelTop)) + "px";
     detailPanel.style.left = "auto";
     detailPanel.style.right = compact ? "12px" : "20px";
     detailPanel.style.transform = "none";
-    detailPanel.style.maxHeight = Math.max(
-        100,
-        window.innerHeight - panelTop - 20
-    ) + "px";
+    detailPanel.style.maxHeight = Math.round(panelMaxHeight) + "px";
 }}
 
 function clearSelection() {{
